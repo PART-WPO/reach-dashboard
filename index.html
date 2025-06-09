@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>REACH Tool Dashboard</title>
+  <title>WPO REACH Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <link rel="stylesheet" href="style.css">
@@ -141,6 +141,7 @@
   Papa.parse(csvUrl, {
     download: true,
     header: true,
+    encoding: "UTF-8",
     complete: function(results) {
       allData = results.data;
       // ✅ Sort by most recent date before initial render
@@ -310,9 +311,9 @@ function updateURLParams() {
 
   const mm = String(date.getMonth() + 1).padStart(2, '0');
   const dd = String(date.getDate()).padStart(2, '0');
-  const yy = String(date.getFullYear()).slice(-2);
+  const yyyy = String(date.getFullYear());
 
-  return `${mm}/${dd}/${yy}`;
+  return `${mm}/${dd}/${yyyy}`;
 }
   
   function renderCards(data) {
