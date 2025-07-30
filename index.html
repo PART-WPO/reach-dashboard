@@ -127,20 +127,6 @@
   const csvUrl = 'https://raw.githubusercontent.com/PART-WPO/reach-dashboard/refs/heads/main/Open%20Science%20Report%20(GitHub)%20-%20Open%20Science%20Report%20(1).csv';
   let picker;
   let allData = [];
-  
-  // Extract award number from URL path if it exists (e.g., /123456 or /123456/3)
-let preloadedAward = null;
-let preloadedCount = null;
-
-const pathParts = window.location.pathname.split('/').filter(Boolean);
-
-if (pathParts.length >= 1 && pathParts[0].startsWith("NA")) {
-  preloadedAward = decodeURIComponent(pathParts[0]);
-
-  if (pathParts.length > 1 && !isNaN(parseInt(pathParts[1]))) {
-    preloadedCount = parseInt(pathParts[1]);
-  }
-}
 
   // Debounce utility
   function debounce(func, delay) {
@@ -208,10 +194,6 @@ if (pathParts.length >= 1 && pathParts[0].startsWith("NA")) {
       picker.setDateRange(start, end);
     }
   }
-    
- if (preloadedAward && !document.getElementById("searchAwardNumber").value) {
-  document.getElementById("searchAwardNumber").value = preloadedAward;
-}
 
   filterData(); // Trigger filtering based on populated fields
 }
@@ -299,13 +281,6 @@ filtered.sort((a, b) => {
   const dateB = b["Journal Pub Date"] ? new Date(b["Journal Pub Date"]) : new Date(0);
   return dateB - dateA;
 });
-    
-    if (awardSearch) {
-    const matchCount = filtered.length;
-    const formattedAward = encodeURIComponent(awardSearch);
-    const newPath = `/${formattedAward}/${matchCount}`;
-    window.history.replaceState({}, "", newPath);
-  }
     renderCards(filtered);
   }
 
@@ -415,7 +390,6 @@ function updateURLParams() {
     document.getElementById("programFilter").value = "";
     document.getElementById("openAccessFilter").value = "";
     document.getElementById("dateRange").value="";
-    history.replaceState(null, "", "/");
     if (picker) picker.clearSelection();
     filterData();
   }
@@ -458,4 +432,5 @@ function downloadCSV() {
 </script>
 </body>
 </html>
+
 
