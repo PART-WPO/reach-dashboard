@@ -127,6 +127,12 @@
   const csvUrl = 'https://raw.githubusercontent.com/PART-WPO/reach-dashboard/refs/heads/main/Open%20Science%20Report%20(GitHub)%20-%20Open%20Science%20Report%20(1).csv';
   let picker;
   let allData = [];
+  const text = v => (v ?? "").toString().trim();
+const truthy = v => /^(true|yes|1|y)$/i.test(text(v));
+const get = (row, keys) => {
+  for (const k of keys) if (k in row && text(row[k]) !== "") return row[k];
+  return "";
+};
 
   // Debounce utility
   function debounce(func, delay) {
@@ -199,19 +205,24 @@
 }
   
   function populateDropdowns() {
-    const programs = new Set();
-    allData.forEach(row => {
-      if (row["Program"]) programs.add(row["Funded By"]);
-    });
+  const programs = new Set();
+  allData.forEach(row => {
+    const p = text(row["Funded By"]);
+    if (p) programs.add(p);
+  });
 
-    const programFilter = document.getElementById("programFilter");
-    programs.forEach(prog => {
+  const programFilter = document.getElementById("programFilter");
+  // Keep your static options; just append any not already present
+  const existing = new Set(Array.from(programFilter.options).map(o => o.value));
+  programs.forEach(prog => {
+    if (!existing.has(prog)) {
       const option = document.createElement("option");
       option.value = prog;
       option.textContent = prog;
       programFilter.appendChild(option);
-    });
-  }
+    }
+  });
+}
 
   function attachEventListeners() {
     document.getElementById("searchInput")?.addEventListener("input", debounce(() => {
@@ -270,7 +281,10 @@ endDate = endStr ? parseDate(endStr) : null;
       const dateMatch = (!startDate|| (pubDate && pubDate >= startDate)) && (!endDate || (pubDate && pubDate <= endDate));
 
       return (!keywordQuery || combinedSearch.includes(keywordQuery)) &&
-             (!awardSearch || awardValue.includes(awardSearch)) &&
+            (!awardSearch || awardSearch
+  .split(/[,;]+/) // split on comma or semicolon
+  .map(term => term.trim().toLowerCase())
+  .some(term => awardValue.includes(term))) &&
              (!outputType || outputValue === outputType) &&
              (!program || program === programValue) &&
              accessMatch &&
@@ -317,71 +331,113 @@ function updateURLParams() {
 }
   
   function renderCards(data) {
-    const container = document.getElementById("cardsContainer");
-    const noResults = document.getElementById("noResultsMessage");
-    container.innerHTML = "";
-    container.className = "cards-grid";
+  const container = document.getElementById("cardsContainer");
+  const noResults = document.getElementById("noResultsMessage");
+  container.innerHTML = "";
+  container.className = "cards-grid";
 
-    document.getElementById("output-count").textContent = data.length;
+  document.getElementById("output-count").textContent = data.length;
 
-    if (data.length === 0) {
+  if (data.length === 0) {
     noResults.style.display = "block";
     return;
   } else {
     noResults.style.display = "none";
   }
-    
-    data.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "dynamic-card";
-      card.setAttribute("data-search", item["Search Combined"] || "");
-      card.setAttribute("data-award", item["Award Number(s)"] || "");
-      card.style = `border-left: 4px solid ${item["Link Background Color"]}; 
-                    border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif; 
-                    margin: 10px; max-width: 600px; box-shadow: 0 2px 5px;`;
+  
+  data.forEach(item => {
+    // NEW: Pull partnership info from CSV columns
+    const isPartnership = /^(true|yes|1)$/i.test((item["Partnership?"] || "").toString().trim());
+    const partnershipName = item["Partnership Name"]?.trim() || "";
+    const partnerName = item["Partner Name"]?.trim() || "";
+    const partnershipUrl = item["Partnership URL (if available)"]?.trim() || "";
+    const partnershipLogoUrl = item["Partnership Logo URL (if available)"]?.trim() || "";
 
-      card.innerHTML = `
-        <table class="header-table" style="border-collapse: collapse; width: 100%;">
-          <tr>
-            <td style="color: #003d66; font-size: 20px; font-weight: bold; padding: 10px; background-color: ${item["Card Background Color"]};">
-              ${item["Card Header Text"]} 
-            </td>
-            <td style="text-align: right; padding: 10px; background-color: ${item["Card Background Color"]};">
+    const programLabel = isPartnership ? "WPO Partnership" : (item["Funded By"] || "");
+    const awardSection = isPartnership
+      ? ''
+      : `<p style="font-size: 13px;"><strong>Award Number(s):</strong> ${item["Award Number(s)"]}</p>`;
+
+    const programSection = isPartnership
+      ? `<p style="font-size: 13px; display: flex; align-items: center; white-space: nowrap;">
+           <span style="font-weight: bold;">Partnership:</span>
+           ${
+             partnershipUrl
+               ? `<a href="${partnershipUrl}" target="_blank" rel="noopener noreferrer" style="margin-left: 4px; text-decoration: underline; color: #1a73e8;">
+                    ${partnershipName || "Learn more"}
+                  </a>`
+               : `<span style="margin-left: 4px;">${partnershipName || "WPO Partnership"}</span>`
+           }
+         </p>`
+      : `<p style="font-size: 13px; font-weight: bold; display: flex; align-items: center;">
+           WPO Program: <span style="font-weight: normal; margin-left: 4px;">${programLabel}</span>
+         </p>`;
+
+    const partnerLine = isPartnership
+      ? `<div style="font-size: 13px; display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+           <div style="display: flex; align-items: center;">
+             <span style="font-weight: bold; color: #003366 ">Partner:</span>
+             <span style="margin-left: 4px; color: #003366;">${partnerName}</span>
+           </div>
+           ${
+             partnershipLogoUrl
+               ? `<img src="${partnershipLogoUrl}" alt="Partner Logo" title="Partner Logo" style="height: 41px;" />`
+               : ""
+           }
+         </div>`
+      : '';
+
+    const card = document.createElement("div");
+    card.className = "dynamic-card";
+    card.setAttribute("data-search", item["Search Combined"] || "");
+    card.setAttribute("data-award", item["Award Number(s)"] || "");
+    card.style = `border-left: 4px solid ${item["Link Background Color"]}; 
+                  border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif; 
+                  margin: 10px; max-width: 600px; box-shadow: 0 2px 5px;`;
+
+    card.innerHTML = `
+      <table class="header-table" style="border-collapse: collapse; width: 100%;">
+        <tr>
+          <td style="color: #003d66; font-size: 20px; font-weight: bold; padding: 10px; background-color: ${item["Card Background Color"]};">
+            ${item["Card Header Text"]} 
+          </td>
+          <td style="text-align: right; padding: 10px; background-color: ${item["Card Background Color"]};">
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
               <span style="display: inline-flex; align-items: center; font-size: 14px; color: #0077cc; font-weight: bold;">
                 <span class="material-icons" style="font-size: 24px; margin-right: 5px;">${item["Open Access Symbol"]}</span>
                 <span style="display: inline-flex; align-items: start; flex-direction: column; font-size: 10px; text-align: center;">
                   ${item["Open Access Text"]}
                 </span>
               </span>
-            </td>
-          </tr>
-        </table>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-        <div style="padding: 20px;">
-          <h2 style="margin-top: 0; font-size: 17px; color: #333;">${item["Title"]}</h2>
-          <p style="font-size: 13px; color: gray; font-style: italic; margin-top: 5px;">
-            ${item["Principal Investigators"]} | ${formatDate(item["Journal Pub Date"])}
-          </p>
-          <p style="font-size: 13px; font-weight: bold;">
-            WPO Program: <span style="font-weight: normal;">${item["Funded By"]}</span>
-          </p>
-          <p style="font-size: 13px;"><strong>Award Number(s):</strong> ${item["Award Number(s)"]}</p>
-          <p class="abstract" style="font-size: 12px; color: #666; margin-top: 15px;">
-            <strong>Abstract:</strong> ${item["Truncated Abstract"]}
-          </p>
-          <p style="margin-top: 20px; text-align: center;">
-            <a href="${item["Link to Output"]}" target="_blank" 
-               style="background-color: ${item["Link Background Color"]}; 
-                      padding: 8px 15px; border-radius: 5px; color: white; font-size: 15px; text-decoration: none;">
-              ${item["Link Text"]}
-            </a>
-          </p>
-        </div>
-      `;
+      <div style="padding: 20px;">
+        <h2 style="margin-top: 0; font-size: 17px; color: #333;">${item["Title"]}</h2>
+        <p style="font-size: 13px; color: gray; font-style: italic; margin-top: 5px;">
+          ${item["Principal Investigators"]} | ${formatDate(item["Journal Pub Date"])}
+        </p>
+        ${programSection}
+        ${partnerLine}
+        ${awardSection}
+        <p class="abstract" style="font-size: 12px; color: #666; margin-top: 15px;">
+          <strong>Abstract:</strong> ${item["Truncated Abstract"]}
+        </p>
+        <p style="margin-top: 20px; text-align: center;">
+          <a href="${item["Link to Output"]}" target="_blank" 
+             style="background-color: ${item["Link Background Color"]}; 
+                    padding: 8px 15px; border-radius: 5px; color: white; font-size: 15px; text-decoration: none;">
+            ${item["Link Text"]}
+          </a>
+        </p>
+      </div>
+    `;
 
-      container.appendChild(card);
-    });
-  }
+    container.appendChild(card);
+  });
+}
 
   function resetFilters() {
     document.getElementById("searchInput").value = "";
@@ -432,5 +488,4 @@ function downloadCSV() {
 </script>
 </body>
 </html>
-
 
