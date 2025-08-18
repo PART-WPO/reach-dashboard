@@ -12,10 +12,10 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 ## 📊 Data Sources  
 
 **Primary Data Source**  
-- Metadata originates from **Division-level Open Science Smartsheet Trackers** (maintained by each WPO division).  
-- Trackers are updated when new outputs are identified, including **journal articles detected monthly via the CrossRef API**.  
-- A **consolidated WPO Smartsheet Report** merges outputs from all divisions into a single dataset (award numbers, titles, authors, output types, hazard categories, resource links).  
-- A **Google Apps Script** retrieves this dataset via the Smartsheet API, cleans/normalizes it, and uploads it as a CSV to this GitHub repository.  
+- Metadata originates from [Division-level Open Science Smartsheet Trackers](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/Template%20of%20WPO%20Open%20Science%20Tracker.xlsx) (maintained by each WPO division).  
+- Trackers are updated when new outputs are identified, including journal articles detected monthly via the CrossRef API ([see Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/CrossRef%20API%20Script%20for%20Last%20Month's%20Publications.json)).  
+- A **consolidated WPO Smartsheet Report** merges outputs from all divisions into a single dataset (award numbers, titles, authors, output types, resource links).  
+- A [Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/REACH%20Data%20Pipeline.json) retrieves this dataset via the Smartsheet API, cleans/normalizes it, and uploads it as a CSV to this GitHub repository.  
 
 **Partnership Data**  
 - Embedded in the CSV with metadata (partnership name, organization, logo URL, and detail links).  
@@ -26,10 +26,10 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 ### Step 1 – Automated Publication Detection (CrossRef API)  
 - Monthly automation checks the **CrossRef API** for new publications containing WPO award numbers.  
 - The PART Program receives automated email alerts when new matches are found.  
-- *(See SOP for Collecting and Recording WPO Research Outputs for more details.)*  
+- See [Google Apps Script]((https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/CrossRef%20API%20Script%20for%20Last%20Month's%20Publications.json) for more details.  
 
 ### Step 2 – Smartsheet Data Entry  
-- Newly detected publications are entered into **Division-level Open Science Smartsheet Trackers** (one per division).  
+- Newly detected publications are entered into [Division-level Open Science Smartsheet Trackers](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/Template%20of%20WPO%20Open%20Science%20Tracker.xlsx) (one per division).  
 - Trackers capture metadata such as:  
   - Title  
   - Authors  
@@ -41,19 +41,19 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 
 ### Step 3 – Division Data Consolidation  
 - Data from all three divisions is merged into a **single super sheet** using a Smartsheet Report.  
-- This consolidated report serves as the source for **REACH data exports**.  
+- This consolidated report serves as the source for REACH data exports.  
 
 ### Step 4 – Automated Data Retrieval (Google Apps Script + Smartsheet API)  
-- A **Google Apps Script** calls the Smartsheet API to pull the consolidated report data.  
+- A [Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/REACH%20Data%20Pipeline.json) calls the Smartsheet API to pull the consolidated report data.  
 
 ### Step 5 – Data Cleaning & HTML Preparation  
 The Google Apps Script processes the data by:  
 - Standardizing dates into consistent `MM/DD/YY` or `MM/DD/YYYY` formats  
-- Combining title and abstract text into a single **search-optimized field**  
+- Combining title and abstract text into a single search-optimized field  
 - Truncating abstracts for brief UI display  
 - Consolidating multiple link fields into one column  
-- Formatting output types with **HTML icons, labels, and color codes**  
-- Adding **open access labels and icons** based on availability  
+- Formatting output types with HTML icons, labels, and color codes  
+- Adding open access labels and icons based on availability  
 - Normalizing program and “Funded By” names  
 - Sanitizing text to replace problematic characters and remove non-ASCII  
 - Escaping special characters for HTML safety before CSV upload  
@@ -69,16 +69,16 @@ The Google Apps Script processes the data by:
   - The CSV is fetched from **GitHub’s Raw Content API**  
   - **PapaParse.js** parses CSV → JavaScript objects  
   - **Choices.js** enables multi-select dropdown filtering  
-  - Results are displayed as responsive **cards**  
-  - **Partnership Cards** replace standard program info for partnership outputs  
+  - Results are displayed as responsive cards  
+  - Partnership Cards replace standard program info for partnership outputs  
 
 ### Step 8 – Public Embedding on the WPO Website  
-- The live REACH GitHub Page is embedded via an **iframe** on the WPO’s public-facing WordPress site.  
+- The live REACH GitHub Page is embedded via an iframe on the WPO’s public-facing WordPress site.  
 - Visitors can access the tool directly without leaving the WPO site.  
 
 ## 🔁 Update & Refresh Process  
 
-- The **Google Apps Script** is configured with a **time-based trigger** to run automatically on the **15th of every month**.  
+- The [Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/REACH%20Data%20Pipeline.json) is configured with a **time-based trigger** to run automatically on the **15th of every month**.  
 - When triggered, the script:  
   1. Calls the Smartsheet API to pull the latest consolidated data  
   2. Cleans, formats, and enriches the dataset  
@@ -99,16 +99,16 @@ The Google Apps Script processes the data by:
 ## 🎨 UI/UX Features  
 
 - 🔍 Keyword and award number search for quick discovery of relevant outputs  
-- 🗂 Filter options by **WPO Program, Output Type, Open Access Status, and Date**  
+- 🗂 Filter options by WPO Program, Output Type, Open Access Status, and Date  
 - 🎨 Color-coded headers and icons to visually distinguish output types  
 - ⏱ Most recent outputs appear first for faster access to new resources  
-- 🤝 **Partnership Cards** display outputs from WPO partnerships (partner name, organization, logo, links)  
-- 📚 Top-right card icon indicates availability in the **NOAA Institutional Repository (IR)**  
+- 🤝 Partnership Cards display outputs from WPO partnerships (partner name, organization, logo, links)  
+- 📚 Top-right card icon indicates availability in the NOAA Institutional Repository (IR)  
 - ⬇️ Option to download a customized list of search results (metadata + DOI links) for offline reference  
 
 ## 🚀 Hosting & Deployment  
 
-- **Static Hosting:** GitHub Pages  
+- Static Hosting: GitHub Pages  
 - **Fully Automated Pipeline:**  
   1. CrossRef detects new publications → Email sent to PART  
   2. PART enters data into Division Smartsheet Trackers  
@@ -121,11 +121,11 @@ The Google Apps Script processes the data by:
 
 ## ⚠️ Known Limitations  
 
-- Pipeline depends on **accurate award number entry** in publications for detection  
-- Initial data entry into Smartsheet Trackers is still **manual**  
+- Pipeline depends on inclusion of and accurate award number entry in publications for detection  
+- Initial data entry into Smartsheet Trackers is still manual  
 - API rate limits (GitHub, Smartsheet) may impact large updates  
 
 ## 🔮 Future Enhancements  
 
-- Direct **CrossRef API → Smartsheet Tracker** integration to eliminate manual entry  
-- Automatic **DOI metadata enrichment** (abstracts, citation formats)  
+- Direct CrossRef API → Smartsheet Tracker integration to eliminate manual entry  
+- Automatic DOI metadata enrichment (abstracts, citation formats)  
