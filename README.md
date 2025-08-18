@@ -40,7 +40,7 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
   - Links  
 
 ### Step 3 – Division Data Consolidation  
-- Data from all three divisions is merged into a **single master sheet** using a Smartsheet Report.  
+- Data from all three divisions is merged into a **single super sheet** using a Smartsheet Report.  
 - This consolidated report serves as the source for **REACH data exports**.  
 
 ### Step 4 – Automated Data Retrieval (Google Apps Script + Smartsheet API)  
