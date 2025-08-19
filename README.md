@@ -23,10 +23,17 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 
 ## 🔄 End-to-End Data Workflow  
 
+### Step 0.5: Collect Publication Data (if starting from scratch)
+If you have not yet collected any publication data for your grant awards, you can begin by using two Google Apps Scripts located in the [publication-scripts-starting-point folder](https://github.com/PART-WPO/reach-dashboard/tree/main/data-pipeline/publication-scripts-starting-point):
+- [Finding All Publications Script using CrossRef API](https://github.com/PART-WPO/reach-dashboard/blob/33a841c3adea8f87c2e34a5a7860102e3b8fae77/data-pipeline/publication-scripts-starting-point/Starting%20from%20Scratch_%20Finding%20All%20Publications.json) – to search for and collect all publications associated with your award numbers.
+- [Finding Abstract Information Script using Semantic Scholar API](https://github.com/PART-WPO/reach-dashboard/blob/33a841c3adea8f87c2e34a5a7860102e3b8fae77/data-pipeline/publication-scripts-starting-point/Finding%20Abstract%20Information%20for%20Publications.json) – to enrich those publications with abstract data.
+
+These scripts provide a starting dataset that you can then use with the REACH workflow.
+
 ### Step 1 – Automated Publication Detection (CrossRef API)  
 - Monthly automation checks the **CrossRef API** for new publications containing WPO award numbers.  
 - The PART Program receives automated email alerts when new matches are found.  
-- See [Google Apps Script]((https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/CrossRef%20API%20Script%20for%20Last%20Month's%20Publications.json) for more details.  
+- See [Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/CrossRef%20API%20Script%20for%20Last%20Month's%20Publications.json) for more details.  
 
 ### Step 2 – Smartsheet Data Entry  
 - Newly detected publications are entered into [Division-level Open Science Smartsheet Trackers](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/Template%20of%20WPO%20Open%20Science%20Tracker.xlsx) (one per division).  
