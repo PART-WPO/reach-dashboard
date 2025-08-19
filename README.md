@@ -23,7 +23,7 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 
 ## 🔄 End-to-End Data Workflow  
 
-### Step 0.5: Collect Publication Data (if starting from scratch)
+### Step 0: Collect Publication Data (if starting from scratch)
 If you have not yet collected any publication data for your grant awards, you can begin by using two Google Apps Scripts located in the [publication-scripts-starting-point folder](https://github.com/PART-WPO/reach-dashboard/tree/main/data-pipeline/publication-scripts-starting-point):
 - [Finding All Publications Script using CrossRef API](https://github.com/PART-WPO/reach-dashboard/blob/33a841c3adea8f87c2e34a5a7860102e3b8fae77/data-pipeline/publication-scripts-starting-point/Starting%20from%20Scratch_%20Finding%20All%20Publications.json) – to search for and collect all publications associated with your award numbers.
 - [Finding Abstract Information Script using Semantic Scholar API](https://github.com/PART-WPO/reach-dashboard/blob/33a841c3adea8f87c2e34a5a7860102e3b8fae77/data-pipeline/publication-scripts-starting-point/Finding%20Abstract%20Information%20for%20Publications.json) – to enrich those publications with abstract data.
