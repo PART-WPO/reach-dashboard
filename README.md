@@ -124,7 +124,7 @@ The Google Apps Script processes the data by:
   5. Script cleans/normalizes data and saves as CSV  
   6. Script uploads CSV to GitHub via GitHub API  
   7. REACH fetches CSV on page load for public display  
-  8. REACH GitHub Page is embedded via an **iframe** on WPO’s WordPress site  
+  8. REACH GitHub Page is embedded via an iframe on WPO’s WordPress site  
 
 ## ⚠️ Known Limitations  
 
