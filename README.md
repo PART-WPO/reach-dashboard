@@ -1,5 +1,5 @@
 # REACH Tool  
-**Research Explorer for Articles, Code, and Hosted Data (REACH)**  
+**Research Explorer for Articles, Code, and Hosted Data (REACH)**      [![DOI](https://zenodo.org/badge/996198515.svg)](https://doi.org/10.5281/zenodo.16922908)
 
 The [REACH Tool](https://wpo.noaa.gov/reach/) is a web-based open science platform developed by NOAA’s Weather Program Office (WPO) to provide public access to research outputs generated from WPO-funded projects.  
 
