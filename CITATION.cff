@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "REACH Dashboard"
+authors:
+  - family-names: Williamsberg
+    given-names: Castle
+    affiliation: "Fedwriters Supporting NOAA Weather Program Office (WPO) — PART Team"
+repository-code: "https://github.com/PART-WPO/reach-dashboard"
+license: "Apache-2.0"
+version: "1.0.1"
+date-released: "2025-08-25"
+url: "https://github.com/PART-WPO/reach-dashboard"
