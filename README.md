@@ -135,4 +135,7 @@ The Google Apps Script processes the data by:
 ## 🔮 Future Enhancements  
 
 - Direct CrossRef API → Smartsheet Tracker integration to eliminate manual entry  
-- Automatic DOI metadata enrichment (abstracts, citation formats)  
+- Automatic DOI metadata enrichment (abstracts, citation formats)
+
+## License
+This project is licensed under the [Apache License 2.0](./LICENSE).
