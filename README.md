@@ -12,7 +12,7 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 ## 📊 Data Sources  
 
 **Primary Data Source**  
-- Metadata originates from [Division-level Open Science Smartsheet Trackers](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/Template%20of%20WPO%20Open%20Science%20Tracker.xlsx) (maintained by each WPO division).  
+- Metadata originates from [Division-level Open Science Smartsheet Trackers](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/Template%20of%20WPO%20Open%20Science%20Tracker.xlsx) (maintained for each WPO division).  
 - Trackers are updated when new outputs are identified, including journal articles detected monthly via the CrossRef API ([see Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/CrossRef%20API%20Script%20for%20Last%20Month's%20Publications.json)).  
 - A **consolidated WPO Smartsheet Report** merges outputs from all divisions into a single dataset (award numbers, titles, authors, output types, resource links).  
 - A [Google Apps Script](https://github.com/PART-WPO/reach-dashboard/blob/37d73bb771bdec771b2fa5e1b11cbfc5a20bc4ba/data-pipeline/REACH%20Data%20Pipeline.json) retrieves this dataset via the Smartsheet API, cleans/normalizes it, and uploads it as a CSV to this GitHub repository.  
