@@ -1,7 +1,7 @@
 # REACH Tool  [![DOI](https://zenodo.org/badge/996198515.svg)](https://doi.org/10.5281/zenodo.16922908)  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 **Research Explorer for Articles, Code, and Hosted Data (REACH)** 
 
-The [REACH Tool](https://wpo.noaa.gov/reach/) is a web-based open science platform developed by NOAA’s Weather Program Office (WPO) to provide public access to research outputs generated from WPO-funded projects.  
+The [REACH](https://wpo.noaa.gov/reach/) is a web-based open science tool developed by NOAA’s Weather Program Office (WPO) to provide public access to research outputs generated from WPO-funded projects.  
 
 REACH turns static project lists into a **searchable, filterable, and user-friendly interface**, enabling users to:  
 - 🔍 Search research outputs by keyword or award number  
@@ -139,3 +139,9 @@ The Google Apps Script processes the data by:
 
 ## License
 This project is licensed under the [Apache License 2.0](./LICENSE).
+
+## 📬 Contact
+
+For questions or feedback, please contact the **WPO Portfolio Analysis and Research Transitions (PART) Program** at:  
+📧 **part.wpo@noaa.gov**  
+🌐 [https://wpo.noaa.gov](https://wpo.noaa.gov/)
