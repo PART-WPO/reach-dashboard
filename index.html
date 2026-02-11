@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WPO REACH Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <link rel="stylesheet" href="style.css">
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" />
@@ -13,7 +12,10 @@
   
 </head>
 <body>
-  <div class="dashboard-container">
+  <a class="skip-link" href="#filters"> Skip to filters</a>
+
+  <main id="main-content" class="dashboard-container">
+  
     <div class="header">
       <div class="title-with-logo">
         <img src="data:image/png;base64,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" alt="WPO logo" class="logo">
@@ -49,19 +51,21 @@
             <h3 class="widget-header"><strong>Don't see your research output?</strong></h3>
             <p>
               Submit your outputs through our<br>
-              <a href="https://forms.gle/CuBwxuveitikyTGF8" target="_blank" style="text-decoration: underline;">Google Form</a>!
+              <a href="https://forms.gle/CuBwxuveitikyTGF8" target="_blank" style="text-decoration: underline;">Google Form<span class="sr-only">(opens in a new tab)</span></a>!
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Filters -->
-    <div class="filters-container">
+   <div id="filters" tabindex="-1"></div>
+      <form class="filters-container" role="search" aria-label="Search and filters">
+     <fieldset>
+      <legend class="sr-only">Search and filters</legend> <!-- Filters -->
         <!-- Row 1 -->
       <div class="filter-row three-columns">
         <div class="filter-group">
-          <label for="search">Search</label>
+          <label for="searchInput">Search</label>
           <input type="text" id="searchInput" placeholder="Search by Keyword">
         </div>
         <div class="filter-group">
@@ -84,7 +88,7 @@
         </div>
       </div>
 
-      <div class="filter-row five-columns second-row">
+      <div class="filter-row four-columns second-row">
   <div class="filter-group">
     <label for="outputTypeFilter">Output Type</label>
     <select id="outputTypeFilter">
@@ -104,23 +108,50 @@
     </select>
   </div>
   <div class="filter-group">
-    <label for="dateRange">Date Range</label>
-    <input type="text" id="dateRange" placeholder="Eg: 05-25-2025 - 06-25-2025" />
+  <label for="dateRange">Date Range</label>
+  <input
+    type="text"
+    id="dateRange"
+    aria-describedby="dateRangeHelp"
+    placeholder="Eg: 05-25-2025 - 06-25-2025"
+  />
+  <div id="dateRangeHelp" class="sr-only">
+    Enter a start and end date in MM-DD-YYYY format, separated by a hyphen.
   </div>
-  <div class="filter-group">
-    <button class="reset-btn" onclick="resetFilters()"><span class="material-icons">refresh</span>Reset</button>
-  </div>
-  <div class="filter-group">
-    <button onclick="downloadCSV()" class="download-btn"><span class="material-icons">download</span>Download</button>
-  </div>
+
+  <!-- ✅ stays with Date Range, not as its own grid cell -->
+  <div id="dateRangeError" class="sr-only field-error" role="alert" aria-live="assertive"></div>
 </div>
-      </div>
-<p id="noResultsMessage" class="no-results">
+
+
+<div class="filter-actions">
+  <button type="button" class="reset-btn" onclick="resetFilters()">
+    <span class="material-icons" aria-hidden="true">refresh</span>
+    Reset
+  </button>
+
+  <button type="button" class="download-btn" onclick="downloadCSV()">
+    <span class="material-icons" aria-hidden="true">download</span>
+    Download
+  </button>
+</div>
+       </div>
+     </fieldset>
+      </form>
+      
+      <div id="resultsStatus" class="sr-only" role="status" aria-live="polite"></div>
+      
+<p id="noResultsMessage" class="no-results" role="status" aria-live="polite">
   <span class="no-results-title">No results found.</span>
   <br>
   Nothing is turning up with that word, phrase, or award number. Please check your filters or try something else.
 </p>
-  <div class="cards-grid" id="cardsContainer"></div>
+  <div id="results" tabindex="-1" role="region" aria-label="Search results">
+      <div class="cards-grid" id="cardsContainer" role="list"></div>
+      </div>
+    </div>
+  </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script>
@@ -144,7 +175,10 @@ const get = (row, keys) => {
   }
 
   function fetchData() {
-  Papa.parse(csvUrl, {
+  const statusEl = document.getElementById("resultsStatus");
+if (statusEl) statusEl.textContent = "Loading results…";
+    
+    Papa.parse(csvUrl, {
     download: true,
     header: true,
     encoding: "UTF-8",
@@ -169,15 +203,14 @@ const get = (row, keys) => {
         format: 'MM-DD-YYYY',
         allowRepick: true,
         setup: (pickerInstance) => {
-          pickerInstance.on('selected', () => filterData());
+         pickerInstance.on('selected', () => {
+  filterData();
+  updateURLParams();
+});
           
         }
 
       });
-       document.getElementById("dateRange")?.addEventListener("input", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
       
   applyURLParams();
     }
@@ -225,28 +258,158 @@ const get = (row, keys) => {
 }
 
   function attachEventListeners() {
-    document.getElementById("searchInput")?.addEventListener("input", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
-    document.getElementById("searchAwardNumber")?.addEventListener("input", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
-   document.getElementById("outputTypeFilter")?.addEventListener("change", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
-   document.getElementById("programFilter")?.addEventListener("change", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
-    document.getElementById("openAccessFilter")?.addEventListener("change", debounce(() => {
-  filterData();
-  updateURLParams();
-}, 300));
+  document.getElementById("searchInput")?.addEventListener(
+    "input",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  document.getElementById("searchAwardNumber")?.addEventListener(
+    "input",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  document.getElementById("outputTypeFilter")?.addEventListener(
+    "change",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  document.getElementById("programFilter")?.addEventListener(
+    "change",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  document.getElementById("openAccessFilter")?.addEventListener(
+    "change",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  const dateEl = document.getElementById("dateRange");
+  if (!dateEl) return;
+
+  console.log("✅ dateRange listeners attached");
+
+  dateEl.addEventListener(
+    "input",
+    debounce(() => {
+      filterData();
+      updateURLParams();
+    }, 300)
+  );
+
+  dateEl.addEventListener("blur", () => {
+    filterData();
+    updateURLParams();
+  });
+
+  dateEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      filterData();
+      updateURLParams();
+    }
+  });
+}
+
+
+  function isValidDateObj(d) {
+  return d instanceof Date && !isNaN(d.getTime());
+}
+
+function parseMmDdYyyy(str) {
+  // expects MM-DD-YYYY
+  const m = str.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (!m) return null;
+
+  const mm = Number(m[1]);
+  const dd = Number(m[2]);
+  const yyyy = Number(m[3]);
+
+  // basic bounds
+  if (mm < 1 || mm > 12 || dd < 1 || dd > 31 || yyyy < 1000) return null;
+
+  // create date and verify it didn’t roll (e.g., 02-31-2025)
+  const d = new Date(yyyy, mm - 1, dd);
+  if (d.getFullYear() !== yyyy || d.getMonth() !== (mm - 1) || d.getDate() !== dd) return null;
+
+  return d;
+}
+
+function parseDateRangeInput(raw) {
+  // expects "MM-DD-YYYY - MM-DD-YYYY"
+  const value = (raw || "").trim();
+  if (!value) return { start: null, end: null, error: "" };
+
+  const parts = value.split(" - ");
+  if (parts.length !== 2) {
+    return {
+      start: null,
+      end: null,
+      error: "Date range must be two dates in MM-DD-YYYY format, separated by a hyphen."
+    };
   }
 
+  const start = parseMmDdYyyy(parts[0].trim());
+  const end = parseMmDdYyyy(parts[1].trim());
+
+  if (!start || !end) {
+    return {
+      start: null,
+      end: null,
+      error: "One or both dates are invalid. Use MM-DD-YYYY - MM-DD-YYYY."
+    };
+  }
+
+  if (end < start) {
+    return {
+      start: null,
+      end: null,
+      error: "End date must be the same as or after the start date."
+    };
+  }
+
+  return { start, end, error: "" };
+}
+
+function setDateRangeError(msg) {
+  const el = document.getElementById("dateRangeError");
+  const input = document.getElementById("dateRange");
+  if (!el || !input) return;
+
+  const hasError = !!(msg && msg.trim());
+
+  // Text
+  el.textContent = hasError ? msg : "";
+
+  // aria-invalid
+  input.setAttribute("aria-invalid", hasError ? "true" : "false");
+
+  // aria-describedby: always help, plus error only when needed
+  const describedBy = ["dateRangeHelp"];
+  if (hasError) describedBy.push("dateRangeError");
+  input.setAttribute("aria-describedby", describedBy.join(" "));
+
+  // ✅ VISUAL: hide/show the error line
+  el.classList.toggle("sr-only", !hasError);
+
+  // ✅ Optional: give the input a visible error outline (if you want)
+  input.classList.toggle("input-error", hasError);
+}
+  
   function filterData() {
     const keywordQuery = document.getElementById('searchInput')?.value.toLowerCase().trim() || "";
     const awardSearch = document.getElementById("searchAwardNumber")?.value.toLowerCase().trim() || "";
@@ -254,18 +417,20 @@ const get = (row, keys) => {
     const program = document.getElementById("programFilter")?.value || "";
     const openAccess = document.getElementById("openAccessFilter")?.value || "";
     const dateRangeInput = document.getElementById('dateRange')?.value || "";
-let startDate = null, endDate = null;
+const { start, end, error } = parseDateRangeInput(dateRangeInput);
 
-if (dateRangeInput.includes(' - ')) {
-  const [startStr, endStr] = dateRangeInput.split(' - ');
+setDateRangeError(error);
 
-const parseDate = (str) => {
-  const [month, day, year] = str.split('-');
-  return new Date(`${year}-${month}-${day}`);
-};
+let startDate = start;
+let endDate = end;
 
-startDate = startStr ? parseDate(startStr) : null;
-endDate = endStr ? parseDate(endStr) : null;
+// If invalid, you have two choices:
+// A) treat it like no date filter (recommended)
+// B) return zero results
+// I recommend A so you don't "break" the page while someone is typing.
+if (error) {
+  startDate = null;
+  endDate = null;
 }
     
     const filtered = allData.filter(row => {
@@ -274,16 +439,51 @@ endDate = endStr ? parseDate(endStr) : null;
       const outputValue = (row["Output Type"] ?? "").toString().trim();
       const outputMatch = !outputType || Number(row["Output Type"]) == Number(outputType);
       const programValue = row["Funded By"] || "";
-      const accessValue = row["Open Access Text"]?.trim() ? "Open Access" : "Not Open Access";
+      const typeNum = Number(row["Output Type"]);
+const irRaw = row["IR?"];
+const irStr = String(irRaw ?? "").trim().toLowerCase();
+const isInIR = irRaw === true || irStr === "true" || irStr === "yes" || irStr === "1";
+
+// Normalize IR Status (supports en dash + casing)
+const irStatus = String(row["IR Status"] ?? "")
+  .replace(/\u2013/g, "-")
+  .trim()
+  .toLowerCase();
+
+const isRejectedOpenAccess = irStatus === "rejected - open access";
+const isRejectedPolicy = irStatus === "rejected - policy";
+
+let accessValue;
+
+if (typeNum === 1) {
+  // Publications: now depends on status + IR flag
+  if (isRejectedPolicy) {
+    accessValue = "Not Open Access";
+  } else if (isRejectedOpenAccess) {
+    accessValue = "Open Access";
+  } else {
+    accessValue = isInIR ? "Open Access" : "Not Open Access";
+  }
+} else if (typeNum === 2 || typeNum === 3 || typeNum === 4) {
+  // Code/Data/Other: always publicly available in your UI
+  accessValue = "Open Access";
+} else {
+  accessValue = "Not Open Access";
+}
       const accessMatch = !openAccess || accessValue === openAccess;
       const pubDateStr = row["Journal Pub Date"];
-      const pubDate = pubDateStr ? new Date(pubDateStr) : null;
-      const dateMatch = (!startDate|| (pubDate && pubDate >= startDate)) && (!endDate || (pubDate && pubDate <= endDate));
+     const pubDate = pubDateStr ? new Date(pubDateStr) : null;
+const hasValidPubDate = pubDate instanceof Date && !isNaN(pubDate);
+
+const dateMatch =
+  (!startDate && !endDate) ? true :
+  hasValidPubDate && (!startDate || pubDate >= startDate) && (!endDate || pubDate <= endDate);
 
       return (!keywordQuery || combinedSearch.includes(keywordQuery)) &&
             (!awardSearch || awardSearch
-  .split(/[,;]+/) // split on comma or semicolon
+  .split(/[\s,;]+/) // split on comma or semicolon
   .map(term => term.trim().toLowerCase())
+  .filter(Boolean)
   .some(term => awardValue.includes(term))) &&
              (!outputType || outputValue === outputType) &&
              (!program || program === programValue) &&
@@ -296,6 +496,7 @@ filtered.sort((a, b) => {
   return dateB - dateA;
 });
     renderCards(filtered);
+    
   }
 
 function updateURLParams() {
@@ -330,13 +531,23 @@ function updateURLParams() {
   return `${mm}/${dd}/${yyyy}`;
 }
   
+function safeId(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+  
   function renderCards(data) {
   const container = document.getElementById("cardsContainer");
   const noResults = document.getElementById("noResultsMessage");
   container.innerHTML = "";
   container.className = "cards-grid";
 
-  document.getElementById("output-count").textContent = data.length;
+ document.getElementById("output-count").textContent = data.length;
+    
+const statusEl = document.getElementById("resultsStatus");
+if (statusEl) statusEl.textContent = `${data.length} outputs shown.`;
 
   if (data.length === 0) {
     noResults.style.display = "block";
@@ -345,8 +556,7 @@ function updateURLParams() {
     noResults.style.display = "none";
   }
   
-  data.forEach(item => {
-    // NEW: Pull partnership info from CSV columns
+  data.forEach((item) => {
     const isPartnership = /^(true|yes|1)$/i.test((item["Partnership?"] || "").toString().trim());
     const partnershipName = item["Partnership Name"]?.trim() || "";
     const partnerName = item["Partner Name"]?.trim() || "";
@@ -381,103 +591,303 @@ function updateURLParams() {
            </div>
            ${
              partnershipLogoUrl
-               ? `<img src="${partnershipLogoUrl}" alt="Partner Logo" title="Partner Logo" style="height: 41px;" />`
+               ? `<img src="${partnershipLogoUrl}"
+     alt="${partnerName ? partnerName + ' logo' : 'Partner logo'}"
+     style="height: 41px;" />`
                : ""
            }
          </div>`
       : '';
 
-    const card = document.createElement("div");
-    card.className = "dynamic-card";
-    card.setAttribute("data-search", item["Search Combined"] || "");
-    card.setAttribute("data-award", item["Award Number(s)"] || "");
-    card.style = `border-left: 4px solid ${item["Link Background Color"]}; 
-                  border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif; 
-                  margin: 10px; max-width: 600px; box-shadow: 0 2px 5px;`;
+   const titleId = `card-title-${safeId(item["Award Number(s)"] || item["Title"] || Math.random())}`;
 
-    card.innerHTML = `
-      <table class="header-table" style="border-collapse: collapse; width: 100%;">
-        <tr>
-          <td style="color: #003d66; font-size: 20px; font-weight: bold; padding: 10px; background-color: ${item["Card Background Color"]};">
-            ${item["Card Header Text"]} 
-          </td>
-          <td style="text-align: right; padding: 10px; background-color: ${item["Card Background Color"]};">
-            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
-              <span style="display: inline-flex; align-items: center; font-size: 14px; color: #0077cc; font-weight: bold;">
-                <span class="material-icons" style="font-size: 24px; margin-right: 5px;">${item["Open Access Symbol"]}</span>
-                <span style="display: inline-flex; align-items: start; flex-direction: column; font-size: 10px; text-align: center;">
-                  ${item["Open Access Text"]}
-                </span>
-              </span>
-            </div>
-          </td>
-        </tr>
-      </table>
+// ✅ Find the original row position in allData (stable mapping for download)
+const rowIndex = allData.indexOf(item);
+    
+    const card = document.createElement("article");
+card.className = "dynamic-card";
+card.setAttribute("role", "listitem");
+card.setAttribute("data-search", item["Search Combined"] || "");
+card.setAttribute("data-award", item["Award Number(s)"] || "");
+card.setAttribute("aria-labelledby", titleId);
+card.dataset.rowIndex = String(rowIndex);
+card.style = `border-left: 4px solid ${item["Link Background Color"]}; 
+              border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif; 
+              margin: 10px; max-width: 600px; box-shadow: 0 2px 5px;`;
 
-      <div style="padding: 20px;">
-        <h2 style="margin-top: 0; font-size: 17px; color: #333;">${item["Title"]}</h2>
-        <p style="font-size: 13px; color: gray; font-style: italic; margin-top: 5px;">
-          ${item["Principal Investigators"]} | ${formatDate(item["Journal Pub Date"])}
-        </p>
-        ${programSection}
-        ${partnerLine}
-        ${awardSection}
-        <p class="abstract" style="font-size: 12px; color: #666; margin-top: 15px;">
-          <strong>Abstract:</strong> ${item["Truncated Abstract"]}
-        </p>
-        <p style="margin-top: 20px; text-align: center;">
-          <a href="${item["Link to Output"]}" target="_blank" 
-             style="background-color: ${item["Link Background Color"]}; 
-                    padding: 8px 15px; border-radius: 5px; color: white; font-size: 15px; text-decoration: none;">
-            ${item["Link Text"]}
-          </a>
-        </p>
-      </div>
-    `;
+  // Normalize type (handles "1" vs 1)
+const type = Number(item["Output Type"]);
+    
+// ✅ Build header icon + label in JS (stable + accessible)
+const iconByType = {
+  1: "library_books", // Articles/Publications
+  2: "terminal",          // Code Releases
+  3: "storage",      // Data & Instruments
+  4: "folder_open"    // Other Outputs
+};
+
+const headerIcon = iconByType[type] || "folder_open";
+
+// Prefer the new plain-text column; fall back to stripping tags from the old column
+const headerLabel =
+  (item["Card Header Label"] || "").trim() ||
+  (item["Card Header Text"] || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim() ||
+  (type === 1 ? "Article" : type === 2 ? "Code" : type === 3 ? "Data" : "Other Output");
+
+const headerMarkup = `
+  <span class="material-icons" aria-hidden="true" focusable="false"
+        style="font-size: 20px; vertical-align: middle; margin-right: 6px;">
+    ${headerIcon}
+  </span>
+  <span style="vertical-align: middle; line-height: 1.5;">
+    ${headerLabel}
+  </span>
+`;    
+
+// Normalize IR flag (handles true / "TRUE" / "Yes" / "1")
+const irRaw = item["IR?"];
+const irStr = String(irRaw ?? "").trim().toLowerCase();
+const isInIR =
+  irRaw === true ||
+  irStr === "true" ||
+  irStr === "yes" ||
+  irStr === "1";
+
+// Normalize IR Status
+const irStatus = String(item["IR Status"] ?? "")
+  .replace(/\u2013/g, "-") // normalize en dash
+  .trim()
+  .toLowerCase();
+
+const isRejectedOpenAccess = irStatus === "rejected - open access";
+const isRejectedPolicy = irStatus === "rejected - policy";
+
+// Decide icon + lines
+let iconName = "cloud_done";
+let srPrefix = "";
+let line1 = "";
+let line2 = "";
+
+// Types 2–4: always publicly available
+if (type === 2 || type === 3 || type === 4) {
+  iconName = "cloud_done";
+  srPrefix = "Publicly available. ";
+  line1 = "Publicly";
+  line2 = "Available";
+}
+
+// Type 1: apply new logic
+else if (type === 1) {
+  // 1) Policy rejection = NOT publicly available
+  if (isRejectedPolicy) {
+    iconName = "lock";
+    srPrefix = "Not accepted by NOAA IR. ";
+    line1 = "Not Accepted";
+    line2 = "By NOAA IR";
+  }
+  // 2) Open-access rejection = still publicly available (just not in NOAA IR)
+  else if (isRejectedOpenAccess) {
+    iconName = "cloud_done";
+    srPrefix = "Publicly available. ";
+    line1 = "Publicly";
+    line2 = "Available";
+  }
+  // 3) In NOAA IR
+  else if (isInIR) {
+    iconName = "cloud_done";
+    srPrefix = "Publicly available in NOAA IR. ";
+    line1 = "Publicly Available";
+    line2 = "in NOAA IR";
+  }
+  // 4) Not in IR yet
+  else {
+    iconName = "lock_clock";
+    srPrefix = "Not available yet in NOAA IR. ";
+    line1 = "Not Available";
+    line2 = "Yet in NOAA IR";
+  }
+}
+
+// Fallback for unknown types
+else {
+  iconName = "cloud_done";
+  srPrefix = "Availability unknown. ";
+  line1 = "Availability";
+  line2 = "Unknown";
+}
+
+const accessLabel = (srPrefix || "").trim() || `${line1} ${line2}`.replace(/\s+/g, " ").trim();
+
+const accessMarkup = `
+  <div class="access-badge" role="img" aria-label="${accessLabel}"
+       style="display: inline-flex; align-items: center; gap: 6px;">
+    <span class="material-icons" aria-hidden="true" focusable="false" style="font-size: 24px; line-height: 1;">
+      ${iconName}
+    </span>
+    <span class="access-text" aria-hidden="true">
+      ${line1}<br>${line2}
+    </span>
+  </div>
+`;
+    
+ const headerBg =
+  (item["Card Background Color"] || "").trim() || "#f0f4f8";
+    
+  card.innerHTML = `
+<div class="card-topbar"
+     style="
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       gap: 12px;
+       padding: 10px;
+       background-color: ${headerBg};
+     ">
+  <div class="card-topbar-left"
+       style="
+         color: #003d66;
+         font-size: 20px;
+         font-weight: 700;
+         text-align: left;
+         flex: 1;
+       ">
+    ${headerMarkup}
+  </div>
+
+  <div class="card-topbar-right"
+       style="display: flex; align-items: center;">
+    ${accessMarkup}
+  </div>
+</div>
+
+  <div style="padding: 20px;">
+   <h2 id="${titleId}" style="margin-top: 0; font-size: 17px; color: #333;">${item["Title"]}</h2>
+   <p style="font-size: 13px; color: gray; font-style: italic; margin-top: 5px;">
+  <span class="sr-only">Principal investigator: </span>${item["Principal Investigators"]}
+  <span aria-hidden="true"> | </span>
+  <span class="sr-only">Publication date: </span>${formatDate(item["Journal Pub Date"])}
+</p>
+    ${programSection}
+    ${partnerLine}
+    ${awardSection}
+    <p class="abstract" style="font-size: 12px; color: #666; margin-top: 15px;">
+      <strong>Abstract:</strong> ${item["Truncated Abstract"]}
+    </p>
+    <p style="margin-top: 20px; text-align: center;">
+      <a href="${item["Link to Output"]}" target="_blank" rel="noopener noreferrer"
+   aria-label="${item["Link Text"]}: ${item["Title"]}"
+   style="background-color: ${item["Link Background Color"]};
+          padding: 8px 15px; border-radius: 5px; color: white; font-size: 15px; text-decoration: none;">
+  ${item["Link Text"]} <span class="sr-only">(opens in a new tab)</span>
+</a>
+    </p>
+  </div>
+`;
 
     container.appendChild(card);
   });
 }
 
   function resetFilters() {
-    document.getElementById("searchInput").value = "";
-    document.getElementById("searchAwardNumber").value = "";
-    document.getElementById("outputTypeFilter").value = "";
-    document.getElementById("programFilter").value = "";
-    document.getElementById("openAccessFilter").value = "";
-    document.getElementById("dateRange").value="";
-    if (picker) picker.clearSelection();
-    filterData();
+  document.getElementById("searchInput").value = "";
+  document.getElementById("searchAwardNumber").value = "";
+  document.getElementById("outputTypeFilter").value = "";
+  document.getElementById("programFilter").value = "";
+  document.getElementById("openAccessFilter").value = "";
+
+  const dateInput = document.getElementById("dateRange");
+  if (dateInput) dateInput.value = "";
+
+  if (picker) {
+    picker.clearSelection();
+    // optional extra safety:
+    // picker.setDateRange(null, null);
   }
 
+  setDateRangeError("");
+  history.replaceState(null, "", window.location.pathname);
+
+  filterData();
+}
+
 function downloadCSV() {
-  const headers = Object.keys(allData[0]);
   const visibleCards = document.querySelectorAll('.dynamic-card');
 
-  // Filter original data to match what's currently displayed
-  const filteredData = Array.from(visibleCards).map(card => {
-    const searchKey = card.getAttribute('data-search');
-    const awardKey = card.getAttribute('data-award');
-
-    return allData.find(row =>
-      (row["Search Combined"] || "") === searchKey &&
-      (row["Award Number(s)"] || "") === awardKey
-    );
-  }).filter(Boolean); // Remove any unmatched entries
+  // Map visible cards back to original data rows
+  const filteredData = Array.from(visibleCards)
+    .map(card => {
+      const i = Number(card.dataset.rowIndex);
+      return Number.isInteger(i) && i >= 0 ? allData[i] : null;
+    })
+    .filter(Boolean);
 
   if (filteredData.length === 0) {
     alert("No data available to download.");
     return;
   }
 
-  const csv = Papa.unparse(filteredData);
+  // ✅ Define which columns users should see (and what they should be called)
+  const DOWNLOAD_MAP = {
+    "Card Header Label": "Output Type",
+    "Title": "Title",
+    "Brief Abstract": "Brief Abstract",
+    "Funded By": "WPO Program Funded",
+    "Award Number(s)": "Award Number(s)",
+    "Principal Investigators": "Principal Investigators",
+    "Journal Pub Date": "Publication Date",
+    "Link to Output": "Link",
+  };
+
+  // ✅ Build clean export rows with renamed headers
+  const downloadRows = filteredData.map(row => {
+    const out = {};
+    Object.entries(DOWNLOAD_MAP).forEach(([sourceKey, downloadHeader]) => {
+      out[downloadHeader] = row[sourceKey] ?? "";
+    });
+    return out;
+  });
+
+  // ✅ Preserve header order exactly as defined above
+  const csv = Papa.unparse(downloadRows, {
+    columns: Object.values(DOWNLOAD_MAP)
+  });
 
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
 
   link.setAttribute("href", url);
-  link.setAttribute("download", "REACH_filtered_outputs.csv");
+  // Build a filename suffix from active filters (keyword + award + program + output type + OA + date)
+const keyword = (document.getElementById("searchInput")?.value || "").trim();
+const award = (document.getElementById("searchAwardNumber")?.value || "").trim();
+const program = (document.getElementById("programFilter")?.value || "").trim();
+const outputType = (document.getElementById("outputTypeFilter")?.value || "").trim();
+const openAccess = (document.getElementById("openAccessFilter")?.value || "").trim();
+const dateRange = (document.getElementById("dateRange")?.value || "").trim();
+
+// Helper: make a safe filename chunk
+const slug = (s) =>
+  String(s || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\/\\:]+/g, "_")      // spaces + separators -> _
+    .replace(/[^a-z0-9_-]+/g, "")     // drop weird chars
+    .replace(/_+/g, "_")              // collapse __
+    .replace(/^_+|_+$/g, "");         // trim _
+
+// Prefer keyword if present (your example)
+const parts = [];
+if (keyword) parts.push(slug(keyword));
+else {
+  if (award) parts.push("award_" + slug(award));
+  if (program) parts.push("program_" + slug(program));
+  if (outputType) parts.push("type_" + slug(outputType));
+  if (openAccess) parts.push(slug(openAccess));
+  if (dateRange) parts.push("dates_" + slug(dateRange));
+}
+
+const suffix = parts.length ? "_" + parts.slice(0, 3).join("_") : ""; // limit to 3 chunks
+link.setAttribute("download", `REACH_filtered${suffix}.csv`);
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -488,4 +898,6 @@ function downloadCSV() {
 </script>
 </body>
 </html>
+
+
 
