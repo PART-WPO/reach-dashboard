@@ -877,4 +877,42 @@ body { overflow-x: hidden; }
   overflow: hidden;
   text-overflow: ellipsis;    /* trims long header labels */
 }
-  
+
+/* ===== REACH card topbar: keep badge pinned on same row ===== */
+
+/* 1) Never allow the topbar to wrap */
+.card-topbar {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+}
+
+/* 2) Left side is allowed to shrink (critical in flex layouts) */
+.card-topbar-left {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* 3) Make the header label truncate instead of forcing a wrap */
+.card-topbar-left span:last-child {
+  display: inline-block !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 4) Right side never wraps and never shrinks */
+.card-topbar-right {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+}
+
+/* 5) Badge stays on one line as a unit */
+.access-badge {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
