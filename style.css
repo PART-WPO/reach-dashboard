@@ -868,4 +868,13 @@ body { overflow-x: hidden; }
   flex-shrink: 0;             /* don't let it get squished */
 }
 
+.card-topbar-left {
+  min-width: 0;               /* allows flex item to shrink */
+}
+
+.card-topbar-left span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;    /* trims long header labels */
+}
   
