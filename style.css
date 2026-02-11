@@ -773,11 +773,11 @@ img {
   .dynamic-card { width: 100%; }
 }
 
-.card-topbar { flex-wrap: wrap; }
+.card-topbar { flex-wrap: nowrap; }
 
 @media (max-width: 480px) {
-  .card-topbar-right { width: 100%; }
-  .access-badge { margin-top: 6px; }
+  .card-topbar-right { width: auto; }
+  .access-badge { margin-top: 0px; }
 }
 
 @media (max-width: 600px) {
@@ -861,6 +861,11 @@ body { overflow-x: hidden; }
   .top-row {
     margin-bottom: 24px;
   }
+}
+
+.access-badge {
+  white-space: nowrap;        /* keep icon + text together */
+  flex-shrink: 0;             /* don't let it get squished */
 }
 
   
