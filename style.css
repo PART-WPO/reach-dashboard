@@ -947,7 +947,7 @@ body { overflow-x: hidden; }
 }
 
 /* Show banner only on smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 520px) {
   .mobile-results-banner {
     display: flex;
   }
@@ -962,4 +962,8 @@ body { overflow-x: hidden; }
     box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     border-radius: 0 0 12px 12px;
   }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .mobile-results-banner { display: flex; }
 }
