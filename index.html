@@ -197,43 +197,65 @@ const get = (row, keys) => {
 
   function fetchData() {
   const statusEl = document.getElementById("resultsStatus");
-if (statusEl) statusEl.textContent = "Loading results…";
-    
-    Papa.parse(csvUrl, {
+  if (statusEl) statusEl.textContent = "Loading results…";
+
+  Papa.parse(csvUrl, {
     download: true,
     header: true,
     encoding: "UTF-8",
+    skipEmptyLines: true, // helps, but we also manually clean below
     complete: function(results) {
-      allData = results.data;
-      // ✅ Sort by most recent date before initial render
-  allData.sort((a, b) => {
-    const parse = (d) => {
-      const date = new Date(d);
-      return isNaN(date) ? new Date(0) : date;
-    };
-    return parse(b["Journal Pub Date"]) - parse(a["Journal Pub Date"]);
-  });
+      // Remove fully blank / ghost rows
+      allData = (results.data || [])
+        .filter(row => {
+          if (!row || typeof row !== "object") return false;
+          return Object.values(row).some(value => String(value ?? "").trim() !== "");
+        })
+        .map(row => ({
+          ...row,
+          "Title": String(row["Title"] ?? "").trim(),
+          "Award Number(s)": String(row["Award Number(s)"] ?? "").trim(),
+          "Search Combined": String(row["Search Combined"] ?? "").trim(),
+          "Journal Pub Date": String(row["Journal Pub Date"] ?? "").trim()
+        }));
 
-  populateDropdowns();
-  renderCards(allData);
-  attachEventListeners();
-      // ✅ Initialize Litepicker AFTER data loads and input is present
-      picker = new Litepicker({
-        element: document.getElementById('dateRange'),
-        singleMode: false,
-        format: 'MM-DD-YYYY',
-        allowRepick: true,
-        setup: (pickerInstance) => {
-         pickerInstance.on('selected', () => {
-  filterData();
-  updateURLParams();
-});
-          
-        }
-
+      // Sort by most recent publication date
+      allData.sort((a, b) => {
+        const parseDate = value => {
+          const d = new Date(value);
+          return isNaN(d) ? new Date(0) : d;
+        };
+        return parseDate(b["Journal Pub Date"]) - parseDate(a["Journal Pub Date"]);
       });
-      
-  applyURLParams();
+
+      populateDropdowns();
+      renderCards(allData);
+      attachEventListeners();
+
+      if (!picker) {
+        picker = new Litepicker({
+          element: document.getElementById("dateRange"),
+          singleMode: false,
+          format: "MM-DD-YYYY",
+          allowRepick: true,
+          setup: (pickerInstance) => {
+            pickerInstance.on("selected", () => {
+              filterData();
+              updateURLParams();
+            });
+          }
+        });
+      }
+
+      applyURLParams();
+
+      if (statusEl) {
+        statusEl.textContent = `${allData.length} results loaded.`;
+      }
+    },
+    error: function(err) {
+      console.error("Error loading CSV:", err);
+      if (statusEl) statusEl.textContent = "There was a problem loading results.";
     }
   });
 }
