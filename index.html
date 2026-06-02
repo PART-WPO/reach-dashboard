@@ -108,6 +108,7 @@
       <option value="1">Journal Articles or Publications</option>
       <option value="2">Code Releases</option>
       <option value="3">Data & Instruments</option>
+      <option value="5">Value Stories</option>
       <option value="4">Other Outputs</option>
     </select>
   </div>
@@ -508,7 +509,7 @@ if (typeNum === 1) {
   } else {
     accessValue = "Not Open Access";
   }
-} else if (typeNum === 2 || typeNum === 3 || typeNum === 4) {
+} else if (typeNum === 2 || typeNum === 3 || typeNum === 4 || typeNum === 5) {
   // Code/Data/Other: always publicly available in your UI
   accessValue = "Open Access";
 } else {
@@ -685,7 +686,8 @@ const iconByType = {
   1: "library_books", // Articles/Publications
   2: "terminal",          // Code Releases
   3: "storage",      // Data & Instruments
-  4: "folder_open"    // Other Outputs
+  4: "folder_open",    // Other Outputs
+  5: "book_ribbon"    // Value Stories
 };
 
 const headerIcon = iconByType[type] || "folder_open";
@@ -694,7 +696,7 @@ const headerIcon = iconByType[type] || "folder_open";
 const headerLabel =
   (item["Card Header Label"] || "").trim() ||
   (item["Card Header Text"] || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim() ||
-  (type === 1 ? "Article" : type === 2 ? "Code" : type === 3 ? "Data" : "Other Output");
+  (type === 1 ? "Article" : type === 2 ? "Code" : type === 3 ? "Data" : type ===5 ? "Value Story": "Other Output");
 
 const headerMarkup = `
   <span class="material-icons" aria-hidden="true" focusable="false"
@@ -726,7 +728,7 @@ let line1 = "";
 let line2 = "";
 
 // Types 2–4: always publicly available
-if (type === 2 || type === 3 || type === 4) {
+if (type === 2 || type === 3 || type === 4 || type === 5) {
   iconName = "cloud_done";
   srPrefix = "Publicly available. ";
   line1 = "Publicly";
