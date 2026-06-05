@@ -1,0 +1,35 @@
+{
+  "profile": "tabular-data-package",
+  "name": "wpo-reach-open-science",
+  "title": "WPO REACH Open Science Tracker Data",
+  "description": "Consolidated open science outputs funded by the NOAA Weather Program Office including publications, datasets, and code tags.",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "resources": [
+    {
+      "path": "Open_Science_REACH_Report.csv", 
+      "profile": "tabular-data-resource",
+      "name": "reach-report",
+      "title": "REACH Report Data Table",
+      "schema": {
+        "fields": [
+          { "name": "Output Type", "type": "integer" },
+          { "name": "Award Number(s)", "type": "string", "description": "Cleaned, comma-separated NOAA WPO grant numbers." },
+          { "name": "Title", "type": "string" },
+          { "name": "Brief Abstract", "type": "string" },
+          { "name": "Principal Investigators", "type": "string" },
+          { "name": "Journal Pub Date", "type": "date", "format": "MM/DD/YYYY" },
+          { "name": "Link to Output", "type": "string", "format": "uri" },
+          { "name": "Cleaned Abstract", "type": "string", "description": "Un-truncated, HTML-stripped plain text abstract optimized for LLM embedding." },
+          { "name": "Standardized Date", "type": "date", "format": "YYYY-MM-DD", "description": "ISO-8601 formatted publication date." },
+          { "name": "AI Keywords", "type": "string", "description": "Thematic classification tags for machine ingestion." }
+        ]
+      }
+    }
+  ]
+}
