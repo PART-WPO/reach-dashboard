@@ -1,4 +1,4 @@
-cff-version: 1.1
+cff-version: 2.1
 message: "If you use this software, please cite it as below."
 title: "REACH Dashboard"
 authors:
@@ -7,7 +7,7 @@ authors:
     affiliation: "Fedwriters Supporting NOAA Weather Program Office (WPO) — PART Team"
 repository-code: "https://github.com/PART-WPO/reach-dashboard"
 license: "Apache-2.0"
-version: "1.1"
-date-released: "2025-08-25"
+version: "2.1"
+date-released: "2026-06-08"
 url: "https://github.com/PART-WPO/reach-dashboard"
-doi: https://doi.org/10.5281/zenodo.16943059
+doi: https://doi.org/10.5281/zenodo.16922908
