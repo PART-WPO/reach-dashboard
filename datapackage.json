@@ -1,4 +1,4 @@
-{
+e{
   "profile": "tabular-data-package",
   "name": "wpo-reach-open-science",
   "title": "WPO REACH Open Science Tracker Data",
@@ -12,7 +12,7 @@
   ],
   "resources": [
     {
-      "path": "Open_Science_REACH_Report.csv", 
+      "path": "Open Science Report (GitHub) - Open Science Report(1).csv", 
       "profile": "tabular-data-resource",
       "name": "reach-report",
       "title": "REACH Report Data Table",
