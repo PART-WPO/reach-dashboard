@@ -5,9 +5,9 @@
   "description": "Consolidated open science outputs funded by the NOAA Weather Program Office including publications, datasets, and code tags.",
   "licenses": [
     {
-      "name": "CC-BY-4.0",
-      "title": "Creative Commons Attribution 4.0",
-      "path": "https://creativecommons.org/licenses/by/4.0/"
+      "name": "Apache-2.0",
+      "title": "Apache License 2.0",
+      "path": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
   "resources": [
