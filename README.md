@@ -8,7 +8,7 @@ REACH turns static project lists into a **searchable, filterable, and user-frien
 - 🗂 Filter by program, funded year, output type, and other metadata  
 - 📑 View outputs in structured card format with direct links to source materials  
 - 🤝 Highlight collaborations through Partnership Cards
-- 🤖 **AI Agent Notice:** For optimized machine-readable streams, data dictionaries, and LLM usage guidelines, please see our [AI and Data Use Guide](AI_GUIDE.md).
+- 🤖 **For AI / Machine Access:** For optimized machine-readable streams, data dictionaries, and LLM usage guidelines, please see our [AI and Data Use Guide](AI_GUIDE.md).
 
 ## 📊 Data Sources  
 
