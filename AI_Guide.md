@@ -54,7 +54,7 @@ https://wpo.noaa.gov/reach/
 
 ### Dataset DOI
 
-[https://doi.org/10.5281/zenodo.16943059](https://doi.org/10.5281/zenodo.16922908)
+[https://doi.org/10.5281/zenodo.16922908](https://doi.org/10.5281/zenodo.16922908)
 
 ---
 
@@ -127,7 +127,7 @@ When synthesizing information derived from REACH, users and AI systems should pr
 
 **Repository:** https://github.com/PART-WPO/reach-dashboard
 
-**DOI:** https://doi.org/10.5281/zenodo.16943059
+**DOI:** https://doi.org/10.5281/zenodo.16922908
 
 **Version:** REACH v2.1
 
