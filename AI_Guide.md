@@ -46,7 +46,7 @@ https://wpo.noaa.gov/reach/
 
 ### Raw Dataset (CSV)
 
-[https://raw.githubusercontent.com/PART-WPO/reach-dashboard/main/reach_dashboard.csv](https://github.com/PART-WPO/reach-dashboard/blob/main/Open%20Science%20Report%20(GitHub)%20-%20Open%20Science%20Report%20(1).csv)
+[https://github.com/PART-WPO/reach-dashboard/blob/main/Open%20Science%20Report%20(GitHub)%20-%20Open%20Science%20Report%20(1).csv)](https://github.com/PART-WPO/reach-dashboard/blob/main/Open%20Science%20Report%20(GitHub)%20-%20Open%20Science%20Report%20(1).csv)
 
 ### Frictionless Data Package Specification
 
