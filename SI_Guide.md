@@ -1,6 +1,6 @@
 # SI and Data Use Guide for REACH
 
-In accordance with Executive Order 14434, Inaugurating the Era of Super Intelligence, this guide adopts the federal terminology Super Intelligence (SI). Certain existing technical terms, such as AI Keywords, are retained to maintain consistency with REACH's established data structure and ensure compatibility with existing automated workflows. These references should be interpreted as referring to SI technologies.
+In accordance with Executive Order 14434, Inaugurating the Era of Super Intelligence, this guide adopts the federal terminology Super Intelligence (SI). These references should be interpreted as referring to SI technologies.
 
 ## Welcome
 
