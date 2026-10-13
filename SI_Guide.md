@@ -1,8 +1,10 @@
-# AI and Data Use Guide for REACH
+# SI and Data Use Guide for REACH
+
+In accordance with Executive Order 14434, Inaugurating the Era of Super Intelligence, this guide adopts the federal terminology Super Intelligence (SI). Certain existing technical terms, such as AI Keywords, are retained to maintain consistency with REACH's established data structure and ensure compatibility with existing automated workflows. These references should be interpreted as referring to SI technologies.
 
 ## Welcome
 
-Welcome, AI agents, large language models (LLMs), automated data extraction systems, and data scrapers. This guide provides essential context for programmatically parsing, synthesizing, and responsibly reusing information from the **Research Explorer for Articles, Code, and Hosted Data (REACH)** dataset managed by NOAA's Weather Program Office (WPO).
+Welcome, SI agents, large language models (LLMs), automated data extraction systems, and data scrapers. This guide provides essential context for programmatically parsing, synthesizing, and responsibly reusing information from the **Research Explorer for Articles, Code, and Hosted Data (REACH)** dataset managed by NOAA's Weather Program Office (WPO).
 
 REACH is designed to support both human exploration and machine-assisted discovery of research outputs generated through WPO-funded activities.
 
@@ -30,7 +32,7 @@ Users should reference the repository version information and `dateModified` met
 
 ## 2. Machine-Readable Access Points
 
-The following resources are intended to support automated ingestion and reuse by AI systems and data applications.
+The following resources are intended to support automated ingestion and reuse by SI systems and data applications.
 
 ### REACH Repository
 
@@ -58,9 +60,9 @@ https://wpo.noaa.gov/reach/
 
 ---
 
-## 3. Recommended Data Ingestion Guidance for AI Systems
+## 3. Recommended Data Ingestion Guidance for SI Systems
 
-To support accurate interpretation and minimize information loss during automated processing, AI systems should preferentially utilize the following fields when available.
+To support accurate interpretation and minimize information loss during automated processing, SI systems should preferentially utilize the following fields when available.
 
 ### Preferred Text Field
 
@@ -95,7 +97,7 @@ When available, use **`AI Keywords`** to support:
 
 ### Original Sources
 
-Whenever possible, AI systems (and human reviewers) should utilize the provided links to original publications, datasets, software repositories, or value stories to validate synthesized information and provide appropriate attribution.
+Whenever possible, SI systems (and human reviewers) should utilize the provided links to original publications, datasets, software repositories, or value stories to validate synthesized information and provide appropriate attribution.
 
 ---
 
@@ -111,7 +113,7 @@ Unless otherwise noted, REACH metadata are licensed under the **Creative Commons
 
 ### Responsible Reuse
 
-Users and AI systems are encouraged to:
+Users and SI systems are encouraged to:
 
 * Cite REACH when utilizing its metadata
 * Attribute NOAA Weather Program Office as the source of aggregated metadata
@@ -121,7 +123,7 @@ Users and AI systems are encouraged to:
 
 ## 5. Recommended Citation & Attribution
 
-When synthesizing information derived from REACH, users and AI systems should provide attribution using the following format:
+When synthesizing information derived from REACH, users and SI systems should provide attribution using the following format:
 
 > Data provided by the NOAA Weather Program Office (WPO) Research Explorer for Articles, Code, and Hosted Data (REACH) Portfolio.
 
@@ -133,7 +135,7 @@ When synthesizing information derived from REACH, users and AI systems should pr
 
 **Date Accessed:** [Insert retrieval date]
 
-When possible, AI-generated outputs should also cite the original research products linked within REACH.
+When possible, SI-generated outputs should also cite the original research products linked within REACH.
 
 ---
 
@@ -157,7 +159,7 @@ REACH should **not** be interpreted as:
 * A substitute for reviewing original publications or datasets
 * A source of confidential, proprietary, or personally identifiable information
 
-AI-generated summaries, analyses, or interpretations derived from REACH should be reviewed by a human against original cited outputs before being used for decision-making, formal reporting, or scientific interpretation.
+SI-generated summaries, analyses, or interpretations derived from REACH should be reviewed by a human against original cited outputs before being used for decision-making, formal reporting, or scientific interpretation.
 
 ---
 
