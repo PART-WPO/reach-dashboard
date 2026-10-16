@@ -1,35 +1,69 @@
 
 name: Build REACH Agent Feed
 
-# Allow us to run the workflow manually.
+# For now, run manually so we can inspect the results.
 on:
   workflow_dispatch:
 
-# This initial test only needs to read repository files.
+# No permission to modify repository content.
 permissions:
   contents: read
 
 jobs:
-  verify-source:
+  build-feed:
     runs-on: ubuntu-latest
 
     steps:
-      # Download the repository files into the runner.
       - name: Check out repository
         uses: actions/checkout@v7
 
-      # Confirm the original REACH CSV is available.
-      - name: Check REACH source CSV
+      - name: Generate REACH agent feed
+        run: python scripts/build_reach_feed.py
+
+      - name: Validate generated files
         run: |
           python - <<'PY'
+          import csv
+          import hashlib
+          import json
           from pathlib import Path
 
-          source = Path("Open Science Report (GitHub) - Open Science Report (1).csv")
+          manifest = json.loads(
+              Path("agent-data/manifest.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          expected = manifest["source"]["rows"]
 
-          if not source.is_file():
-              raise SystemExit(f"Missing source CSV: {source}")
+          for section in ("index", "details"):
+              total = 0
 
-          print(f"Found: {source.name}")
-          print(f"File size: {source.stat().st_size:,} bytes")
-          print("REACH source check passed!")
+              for entry in manifest[section]["files"]:
+                  path = Path(entry["path"])
+                  data = path.read_bytes()
+
+                  assert len(data) == entry["bytes"]
+                  assert len(data) <= 48 * 1024
+                  assert hashlib.sha256(data).hexdigest() == entry["sha256"]
+
+                  with path.open(
+                      newline="", encoding="utf-8"
+                  ) as file:
+                      count = sum(1 for _ in csv.DictReader(file))
+
+                  assert count == entry["rows"]
+                  total += count
+
+              assert total == expected
+              print(f"{section}: {total} records verified")
+
+          print("REACH agent feed validation passed!")
           PY
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: reach-agent-feed-preview
+          path: agent-data/
+          if-no-files-found: error
+          retention-days: 7
