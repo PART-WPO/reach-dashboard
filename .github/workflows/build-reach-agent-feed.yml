@@ -1,13 +1,23 @@
 
 name: Build REACH Agent Feed
 
-# For now, run manually so we can inspect the results.
+# Run manually or when the source REACH CSV changes.
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Open Science Report (GitHub) - Open Science Report (1).csv'
 
-# No permission to modify repository content.
+# Required to publish generated files to the repository.
 permissions:
-  contents: read
+  contents: write
+
+# Prevent two feed-building runs from writing simultaneously.
+concurrency:
+  group: reach-agent-feed
+  cancel-in-progress: false
 
 jobs:
   build-feed:
@@ -60,6 +70,24 @@ jobs:
           print("REACH agent feed validation passed!")
           PY
 
+      # Publish generated files only after validation succeeds.
+      - name: Publish agent feed to GitHub
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Stage only the generated agent-data directory.
+          git add -A -- agent-data/
+
+          if git diff --cached --quiet; then
+            echo "No changes to the agent feed."
+          else
+            git commit -m "Update REACH Scout agent feed"
+            git push
+          fi
+
+      # Retain a downloadable copy for troubleshooting.
       - name: Upload preview artifact
         uses: actions/upload-artifact@v7
         with:
