@@ -16,7 +16,7 @@ jobs:
     steps:
       # Download the repository files into the runner.
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Confirm the original REACH CSV is available.
       - name: Check REACH source CSV
