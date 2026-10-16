@@ -1,0 +1,35 @@
+
+name: Build REACH Agent Feed
+
+# Allow us to run the workflow manually.
+on:
+  workflow_dispatch:
+
+# This initial test only needs to read repository files.
+permissions:
+  contents: read
+
+jobs:
+  verify-source:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Download the repository files into the runner.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Confirm the original REACH CSV is available.
+      - name: Check REACH source CSV
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          source = Path("Open Science Report (GitHub) - Open Science Report (1).csv")
+
+          if not source.is_file():
+              raise SystemExit(f"Missing source CSV: {source}")
+
+          print(f"Found: {source.name}")
+          print(f"File size: {source.stat().st_size:,} bytes")
+          print("REACH source check passed!")
+          PY
