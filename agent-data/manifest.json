@@ -10,6 +10,7 @@
   "index": {
     "columns": [
       "Record ID",
+      "REACH UID",
       "Output Type",
       "Award Number(s)",
       "Title",
@@ -23,57 +24,63 @@
     "files": [
       {
         "path": "agent-data/index/part-001.csv",
-        "rows": 143,
-        "bytes": 49013,
-        "sha256": "23ef2935f7204927bb1244fae1ad26219e80c24185c8c2e2b400f000f10cddef"
+        "rows": 126,
+        "bytes": 49072,
+        "sha256": "adf8145e0897bc0376e47c2dfd7880160351d2c950441fe6e5570ca3540b12e7"
       },
       {
         "path": "agent-data/index/part-002.csv",
-        "rows": 135,
-        "bytes": 48976,
-        "sha256": "8744141d3ee690105f5c3e47bc9165384bb09809c116bf8a27a970db437e1b62"
+        "rows": 122,
+        "bytes": 49034,
+        "sha256": "e5f175cdb2e2a172f60e35e2ece93c7ea2859c3263c5c9a5f0eb55710cc575ee"
       },
       {
         "path": "agent-data/index/part-003.csv",
-        "rows": 128,
-        "bytes": 49049,
-        "sha256": "b25d81e270498e82241297ee2e3dab7eeb0889fae01c66f2c3e77e4876340d3b"
+        "rows": 115,
+        "bytes": 49051,
+        "sha256": "89d05faa751f576398420dd19720e6e13911c341130dabcf342919715183479c"
       },
       {
         "path": "agent-data/index/part-004.csv",
-        "rows": 149,
-        "bytes": 48983,
-        "sha256": "68b8b655f00906abf2710cd303868d3c16bb0c7cb33737d2d2ef6d477ca31275"
+        "rows": 125,
+        "bytes": 48878,
+        "sha256": "a94898220ca85ca1a5124c160ad99748262a2955c3bf37235da8849ab32a1e28"
       },
       {
         "path": "agent-data/index/part-005.csv",
-        "rows": 150,
-        "bytes": 48852,
-        "sha256": "6a1942ef534208bc4311b6b2fdf9bdaa4ea72394ccf58f1b76189daf25f85134"
+        "rows": 134,
+        "bytes": 49031,
+        "sha256": "a669803d431557d3c6b0127b8e00ece64306c38808459244d971e3acfe868352"
       },
       {
         "path": "agent-data/index/part-006.csv",
-        "rows": 141,
-        "bytes": 49081,
-        "sha256": "d91e61205849cef9f03664f9aeff0d8049d71a4141ab467a6c72d1f1cb4d7991"
+        "rows": 125,
+        "bytes": 48882,
+        "sha256": "74a730543b982985027772c71b41fd12e05e044e8b5dc212a32d0b9f17aca6ee"
       },
       {
         "path": "agent-data/index/part-007.csv",
-        "rows": 152,
-        "bytes": 49050,
-        "sha256": "01f62b8beac478d42812e92def0e0fa6cddf83aa37691af550fc6b916e7f42e5"
+        "rows": 128,
+        "bytes": 49005,
+        "sha256": "1d9ee098cbeddbb49b10e58bc1b1dac3548f77510edf585986c764e427279670"
       },
       {
         "path": "agent-data/index/part-008.csv",
-        "rows": 145,
-        "bytes": 48996,
-        "sha256": "ef010173a970fb9bda411744416c640de110f486cb048843e2043eabc6675835"
+        "rows": 132,
+        "bytes": 48898,
+        "sha256": "86f79f97d2ed648f465b82c8eaa1fac918c44fa41c39349ed147453bfa05208c"
       },
       {
         "path": "agent-data/index/part-009.csv",
-        "rows": 95,
-        "bytes": 33104,
-        "sha256": "e7a7392a1cd63b69aebabbbf6bb740644f4816166f3fd4ae8d65d07c90c14c74"
+        "rows": 128,
+        "bytes": 48842,
+        "sha256": "8d2fdf2ae6aa19765a645adcc6ce7f0128d007adec93602641991f069750ad34"
+      },
+      {
+        "path": "agent-data/index/part-010.csv",
+        "rows": 103,
+        "bytes": 40354,
+        "sha256": "c234fe104014b9945046e00acf3df921c9f095669da2d8ed2815c8bc9f0cd472"
       }
     ]
   },
@@ -963,6 +970,6 @@
       }
     ]
   },
-  "record_id_note": "Record IDs locate rows in this snapshot only. For stable identity use DOI/URL/title.",
+  "record_id_note": "Record ID is snapshot-specific. REACH UID is the permanent record identifier.",
   "retrieval_note": "Read every index shard for global duplicate checks; follow Detail File only for candidates needing full fields."
 }
