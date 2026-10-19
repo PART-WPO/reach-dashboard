@@ -20,6 +20,7 @@ MAX_BYTES = 48 * 1024  # Target: no generated CSV shard exceeds 48 KiB.
 
 INDEX_COLUMNS = [
     "Record ID",
+    "REACH UID",
     "Output Type",
     "Award Number(s)",
     "Title",
@@ -31,7 +32,11 @@ INDEX_COLUMNS = [
     "Detail File",
 ]
 REQUIRED_SOURCE_COLUMNS = {
-    "Output Type", "Award Number(s)", "Title", "Link to Output"
+    "REACH UID",
+    "Output Type",
+    "Award Number(s)",
+    "Title",
+    "Link to Output",
 }
 
 
@@ -107,6 +112,23 @@ def main():
     if not records:
         raise ValueError("Source CSV is empty; refusing to overwrite current feed")
 
+        # Validate permanent REACH UIDs.
+    uids = [
+        (row.get("REACH UID") or "").strip()
+        for row in records
+    ]
+
+    if any(not uid for uid in uids):
+        raise ValueError("One or more records are missing REACH UID")
+
+    if len(uids) != len(set(uids)):
+        raise ValueError("Duplicate REACH UIDs detected")
+
+    if any(not uid.startswith("reachuid-v1-") for uid in uids):
+        raise ValueError("Unexpected REACH UID format")
+
+    print(f"Validated {len(uids):,} unique REACH UIDs")
+
     detailed_rows = []
     for i, row in enumerate(records, start=1):
         detailed_rows.append({"Record ID": f"reach-{i:06d}", **row})
@@ -142,7 +164,10 @@ def main():
         },
         "index": {"columns": INDEX_COLUMNS, "files": index_files},
         "details": {"columns": detail_columns, "files": detail_files},
-        "record_id_note": "Record IDs locate rows in this snapshot only. For stable identity use DOI/URL/title.",
+        "record_id_note": (
+    "Record ID is snapshot-specific. "
+    "REACH UID is the permanent record identifier."
+),
         "retrieval_note": "Read every index shard for global duplicate checks; follow Detail File only for candidates needing full fields.",
     }
     manifest_path = DEST / "manifest.json"
