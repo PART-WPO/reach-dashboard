@@ -305,6 +305,15 @@
   let picker;
   let allData = [];
   const text = v => (v ?? "").toString().trim();
+  // Match copied titles despite line breaks, spacing, or punctuation differences.
+  // Apply to BOTH the query and the indexed text; never change the displayed title.
+  const normalizeSearchText = value => String(value ?? "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .replace(/[\p{P}\p{S}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 const truthy = v => /^(true|yes|1|y)$/i.test(text(v));
 const get = (row, keys) => {
   for (const k of keys) if (k in row && text(row[k]) !== "") return row[k];
@@ -582,7 +591,7 @@ function setDateRangeError(msg) {
 }
   
   function filterData() {
-    const keywordQuery = document.getElementById('searchInput')?.value.toLowerCase().trim() || "";
+    const keywordQuery = normalizeSearchText(document.getElementById('searchInput')?.value);
     const awardSearch = document.getElementById("searchAwardNumber")?.value.toLowerCase().trim() || "";
     const outputType = document.getElementById("outputTypeFilter")?.value || "";
     const program = document.getElementById("programFilter")?.value || "";
@@ -605,7 +614,8 @@ if (error) {
 }
     
     const filtered = allData.filter(row => {
-      const combinedSearch = (row["Search Combined"] || "").toLowerCase();
+      const combinedSearch = normalizeSearchText(row["Search Combined"]);
+      const titleSearch = normalizeSearchText(row["Title"]);
       const awardValue = (row["Award Number(s)"] || "").toLowerCase();
       const outputValue = (row["Output Type"] ?? "").toString().trim();
       const outputMatch = !outputType || Number(row["Output Type"]) == Number(outputType);
@@ -649,7 +659,7 @@ const dateMatch =
   (!startDate && !endDate) ? true :
   hasValidPubDate && (!startDate || pubDate >= startDate) && (!endDate || pubDate <= endDate);
 
-      return (!keywordQuery || combinedSearch.includes(keywordQuery)) &&
+      return (!keywordQuery || titleSearch.includes(keywordQuery) || combinedSearch.includes(keywordQuery)) &&
             (!awardSearch || awardSearch
   .split(/[\s,;]+/) // split on comma or semicolon
   .map(term => term.trim().toLowerCase())
